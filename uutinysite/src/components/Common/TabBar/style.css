@@ -1,0 +1,33 @@
+.TabBar {
+  width: 100%;
+  height: 49px;
+  display: inline-flex;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+}
+
+.TabBarItem {
+  width: 33.33%;
+  height: 100%;
+  padding-top: 8.6px;
+}
+
+.TabBarItem img {
+  height: 20.5px;
+  width: 22px;
+  margin-top: 4.5px;
+  display: block;
+  margin: auto;
+}
+
+.normalSpan {
+  color: #9B9B9B;
+  font-size: 10px;
+}
+
+.selectedSpan {
+  color: #FF8000;
+  font-size: 10px;
+}

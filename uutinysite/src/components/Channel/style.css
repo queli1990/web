@@ -1,0 +1,29 @@
+.channel-container {
+  background-color: #F5F5F5;
+  width: 100%;
+  height: 100%;
+}
+.channel-box {
+  width: 100%;
+}
+.channel-box figure {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 44%;
+  height: 94px;
+  margin-left: 4%;
+  margin-top: 15px;
+  text-align: center;
+  background-color: #fff;
+}
+.channel-box figcation{
+  display: block;
+  margin-top: 9px;
+  font-size: 13px;
+}
+.channel-icon {
+  width: 34px;
+  height: 34px;
+  margin-top: 16.25px;
+}

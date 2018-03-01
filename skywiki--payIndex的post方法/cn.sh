@@ -1,0 +1,1 @@
+scp -r build root@47.93.83.7:/home/en_web

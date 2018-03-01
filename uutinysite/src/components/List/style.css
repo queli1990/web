@@ -1,0 +1,29 @@
+.list-box {
+  height: 100%;
+}
+.bigDiv {
+  margin-left: 4%;
+  margin-top: 15px;
+  height: 100%;
+  overflow: scroll;
+}
+
+.content_cell {
+  width: 46%;
+  height: 127px;
+  margin-right: 4%;
+  display: inline-block;
+}
+
+.content_cell img {
+  display: block;
+  width: 100%;
+  height: 97px;
+}
+
+.content_cell span {
+  margin-top: 1%;
+  width: 47%;
+  color: #808080;
+  font-size: 13px;
+}

@@ -1,0 +1,175 @@
+.shadowView {
+  position: absolute;
+  width: 100%;
+  height: 1100px;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+.login_border {
+  position: absolute;
+  left: 50%;
+  top: 376px;
+  width: 400px;
+  height: 388px;
+  margin: -200px 0 0 -194px;
+  background-color: #F2F2F2;
+  z-index: 1;
+}
+.panel {
+  position: relative;
+  display: inline-block;
+}
+.backBtn {
+  width: 12px;
+  height: 12px;
+  margin: 16px 372px 360px 12px;
+}
+.loginViewTitle{
+  position: absolute;
+  top: 43px;
+  left: 178px;
+  display: inline-block;
+  text-align: center;
+  font-size: 22px;
+  color: #FF8000;
+}
+.user-pwd {
+  position: absolute;
+  left: 50px;
+  top: 105px;
+  width: 300px;
+  height: 40px;
+  margin-bottom: 15px;
+}
+.user-pwd img{
+  position: absolute;
+  left: 16px;
+  top: 10px;
+}
+.user-pwd input {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-left: 48px;
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+}
+.user-pwd input:focus {
+  /*去掉选中的蓝色*/
+  outline: none;
+  /*添加边框颜色*/
+  border-color: orange;
+  box-shadow: 0 0 15px orange;
+}
+.forgetPwd {
+  position: absolute;
+  display: inline-block;
+  top: 207px;
+  left: 294px;
+  width: 56px;
+  font-size: 14px;
+  color: #FF8000;
+}
+.loginBtn {
+  position: absolute;
+  left: 50px;
+  top: 239px;
+  width: 300px;
+  height: 40px;
+  color: white;
+  font-size: 18px;
+  outline: none;
+  background-color: #CCCCCC;
+}
+.registBtn-forbid,.registBtn-allow {
+  position: absolute;
+  left: 50px;
+  top: 287px;
+  width: 300px;
+  height: 40px;
+  color: white;
+  font-size: 18px;
+  outline: none;
+  background-color: #CCCCCC;
+}
+.registBtn-forbid:hover {
+  cursor: not-allowed;
+}
+.registBtn-allow:hover {
+  cursor: pointer;
+}
+.leftBlackTitle {
+  position: absolute;
+  display: inline-block;
+  top: 319px;
+  left: 128px;
+  width: 80px;
+  height: 22px;
+  font-size: 16px;
+  color: #666666;
+}
+.orangeTitle {
+  position: absolute;
+  display: inline-block;
+  top: 319px;
+  left: 208px;
+  width: 64px;
+  height: 22px;
+  font-size: 16px;
+  color: #FF8000;
+}
+/*注册*/
+.regist_border {
+  position: absolute;
+  left: 50%;
+  top: 376px;
+  width: 400px;
+  height: 468px;
+  margin: -200px 0 0 -194px;
+  background-color: #F2F2F2;
+  z-index: 1;
+}
+.regist_agree {
+  position: absolute;
+  display: inline-block;
+  top: 339px;
+  left: 94px;
+  width: 120px;
+  height: 17px;
+  font-size: 12px;
+  color: #999999;
+}
+.regist_protocol {
+  position: absolute;
+  display: inline-block;
+  top: 339px;
+  left: 190px;
+  width: 136px;
+  height: 17px;
+  font-size: 12px;
+  color: #FF8000;
+}
+.haveAccount {
+  position: absolute;
+  /*display: inline-block;*/
+  top: 406px;
+  left: 128px;
+  height: 22px;
+  width: 80px;
+  font-size: 16px;
+  color: #666666;
+}
+.backLogin {
+  position: absolute;
+  top: 406px;
+  left: 208px;
+  height: 22px;
+  width: 64px;
+  font-size: 16px;
+  color: #FF8000;
+}
+
+
+
+
+/**/

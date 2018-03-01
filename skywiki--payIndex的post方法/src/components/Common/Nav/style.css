@@ -1,0 +1,91 @@
+.Nav {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  background-color: #F7F7F7;
+}
+.Nav ul {
+  width: 100%;
+  font-size: 0;
+  padding-left: 250px;
+}
+.Nav ul li {
+  list-style: none;
+  display: inline-block;
+  font-size: 16px;
+  color: #666666;
+  height: 52px;
+  line-height: 52px;
+}
+/* .Nav ul li:first-child::after {
+  content: "";
+  position: relative;
+  top: 3px;
+  display: inline-block;
+  margin-left: 22px;
+  height: 18px;
+  width: 2px;
+  background-color: #666;
+} */
+/* .Nav ul li:nth-child(2)::before{
+  content: 'HOT';
+  color: #F07E14;
+} */
+.Nav ul li:hover {
+  cursor: pointer;
+}
+.Nav ul li:not(:first-child) {
+  margin-left: 16px;
+}
+.active {
+  color: #F07E14 !important;
+}
+/***/
+.sNav {
+  width: 1420px;
+  height: 40px;
+  margin: 0 auto;
+  border-top: 1px solid #F07E14;
+}
+.sNav ul {
+  width: 100%;
+  font-size: 0;
+}
+.sNav ul li:hover {
+  cursor: pointer;
+}
+.sNav ul li {
+  list-style: none;
+  display: inline-block;
+  font-size: 16px;
+  color: #666666;
+  height: 40px;
+  line-height: 40px;
+}
+.sNav ul li:not(:first-child) {
+  margin-left: 16px;
+}
+.sNav ul li:first-child {
+  margin-left: 206px;
+}
+.nav-logo {
+  position: absolute;
+  top: 0px;
+  right: 400px;
+}
+.nav-text {
+  display: inline-block;
+  font-size: 16px;
+  height: 52px;
+  line-height: 52px;
+}
+.nav-text::after {
+  content: '';
+  width: 140px;
+  height: 40px;
+  background: url('../../../images/logo.png');
+  background-size: 100%;
+  position: absolute;
+  top: 6px;
+  margin-left: 12px;
+}

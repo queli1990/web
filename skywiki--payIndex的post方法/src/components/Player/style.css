@@ -1,0 +1,170 @@
+.bigContent {
+  width: 1420px;
+  margin: 0 auto;
+}
+.bigContent .Header {
+  /*display: none;*/
+}
+.bigContent video {
+  width: 1420px;
+  /*height: 797px;*/
+  margin: auto;
+}
+.videoName {
+  display: block;
+  height: 35px;
+  margin: 39px 0 24px;
+  color: #444444;
+  font-size: 26px;
+}
+.line {
+  width: 1420px;
+  height: 1px;
+  background-color: #D8D8D8;
+}
+.lineOne {
+  margin: 39px 0 17px 0;
+}
+.lineOne span{
+  height: 24px;
+  font-size: 18px;
+  color: #525252;
+}
+.span_director {
+  font-size: 12px;
+  color: #525252;
+}
+.span_actor {
+  font-size: 12px;
+  margin-left: 125px;
+}
+.left {
+  /* position: absolute; */
+  float: left;
+  display: inline-block;
+  width: 50px;
+}
+.right {
+  display: inline-block;
+  /* position: absolute; */
+  /* float: right; */
+  margin-left: 30px;
+  height: 69px;
+  overflow: hidden;
+  width: 1320px;
+  margin-bottom: 120px;
+}
+.verticalLine {
+  display: inline-block;
+  margin-top: 75px;
+  width: 6px;
+  height: 24px;
+  color: #F07E14;
+}
+.reconmedTitle {
+  display: inline-block;
+  height: 31px;
+  margin-left: 15px;
+  font-size: 24px;
+  color: #666666;
+}
+
+.outer_relatedView {
+  margin-top: 23px;
+  width: 100%;
+	height: 356px;
+	white-space: nowrap;
+	overflow: hidden;
+	overflow-x: scroll; /* 1 */
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;
+	-webkit-overflow-scrolling: touch; /* 2 */
+	text-align: justify; /* 3 */
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+.content_relatedView {
+
+}
+.cell {
+  display: inline-block;
+  width: 220px;
+  height: 313px;
+  margin-right: 20px;
+}
+.cell_title {
+  font-size: 18px;
+  color: #333333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.cell_img {
+  width: 100%;
+  height: 100%;
+}
+
+.selectEpisode {
+  height: 24px;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+.square {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  line-height: 49px;
+  width: 53px;
+  height: 49px;
+  margin: 15px 15px 0 0;
+  background-color: white;
+  border-width: 1px;
+  border-color: #D9D9D9;
+  outline: none;
+  font-size: 16px;
+  color: #525252;
+  border: 1px solid #D9D9D9;
+  text-decoration: none;
+}
+.rectangle {
+  display: inline-block;
+  width: 158px;
+  height: 63px;
+  margin: 20px 22px 0 0;
+  background-color: white;
+  border-width: 1px;
+  border-color: #D9D9D9;
+  outline: none;
+  font-size: 12px;
+  color: #525252;
+  border: 1px solid #D9D9D9;
+}
+.active {
+  color: #FF5802;
+}
+.youtubeVideo .youtubeNav, .navContent{
+  margin-top: -68px;
+}
+.youtubeVideo .nav-logo, .navContent .nav-logo {
+  top: -6px;
+}
+.evip {
+  position: absolute;
+  top: 0;
+  background: url('../../images/other-VIP.png');
+  width: 30px;
+  height: 30px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.rvip {
+  position: absolute;
+  top: 0;
+  background: url('../../images/other-VIP.png');
+  width: 50px;
+  height: 50px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

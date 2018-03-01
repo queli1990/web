@@ -1,0 +1,55 @@
+.carousel {
+  position: relative;
+  width: 1420px;
+  height: 504px;
+  margin: 9px auto 0 auto;
+}
+.carousel-img {
+  width: 896px;
+  height: 100%;
+  float: left;
+}
+.carousel-box {
+  width: 524px;
+  height: 100%;
+  float: right;
+  background: rgb(215, 215, 215);
+}
+.cb li:nth-child(5) {
+  position: relative;
+}
+.cb li:nth-child(5)::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 90%;
+  top: 0px;
+  left: 5%;
+  height: 1px;
+  background-color: rgb(172,172,172);
+}
+.cb li:nth-child(-n+4) {
+  color: black;
+}
+.carousel-box {
+  font-size: 0;
+
+}
+.carousel-box li {
+  list-style: none;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  font-size: 16px;
+  color: rgb(240, 126, 20);
+  padding-left: 40px;
+}
+.carousel-box li:hover {
+  cursor: pointer;
+  background-color: rgb(172,172,172);
+  color: #FFFFFF;
+}
+.vipImg {
+  position: absolute;
+  left: 0;
+}

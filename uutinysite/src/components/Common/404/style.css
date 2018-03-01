@@ -1,0 +1,11 @@
+.sorry {
+  width: 141px;
+  height: 100px;
+  background: url('../../../images/sorry.png');
+  background-size: 100%;
+  position: absolute; 
+  left: 50%;/*配合margin-left的负值实现水平居中*/ 
+  margin-left: -70.5px;/*值的大小等于元素宽度的一半*/
+  top:50%;/*配合margin-top的负值实现垂直居中*/ 
+  margin-top: -50px;/*值的大小等于元素高度的一半*/
+}

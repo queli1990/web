@@ -1,0 +1,119 @@
+.video-container video {
+  width: 100%;
+  height: 210px;
+}
+.album-selections {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+  margin-top: 15px;
+}
+.album-selections::-webkit-scrollbar {
+    display: none;
+} 
+.episodes-item {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #F0F0F0;
+  font-size: 14px;
+  color: #666;
+}
+.album-selections li {
+  
+}
+.variety-item {
+  display: inline-block;
+  width: 161px;
+  height: 66px;
+  padding: 8px 9px;
+  color: #666;
+  font-size: 14px;
+  background: #F0F0F0;
+}
+.album-selections li:not(:first-child) {
+  margin-left: 10px;
+} 
+.ralted-box { 
+
+}
+.ralted-box h1, .ralted-box {
+  margin: 0;
+  padding: 0;
+}
+.related-container figure {
+  margin: 0;
+  padding: 0;
+}
+.related-container {
+  width: 100%;
+}
+.related-container figure {
+  display: inline-block;
+  width: 49%;
+  height: 97px;
+}
+.related-container figure:nth-child(even) {
+  margin-left: 2%;
+}
+.related-container figcaption {
+  font-size: 13px;
+  color: #808080;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.related-container img {
+  width: 100%;
+  height: 100%;
+}
+.album-title {
+  font-size: 12px;
+  color: #666;
+}
+.album-title span {
+  display: inline-block;
+}
+.album-box {
+  width: 94%;
+  margin: 0 auto;
+}
+.episodes-item {
+  width: 40px;
+  height: 40px;
+}
+.episodes-item::not(:first-child) {
+  margin-right: 10px;
+}
+.director {
+  margin-top: 15px;
+  font-size: 12px;
+}
+.director-text, .actor-text, .intro-text {
+  color: #4A4A4A;
+}
+.director-name, .actor-name, .intro-name {
+  color: #666;
+}
+.actor, .intro {
+  font-size: 12px; 
+}
+.split-line {
+  width: 100%;
+  height: 8px;
+  background-color: #F2F2F2;
+}
+.ralted-box h1{
+  font-size: 14px;
+  color: #333333;
+  padding-top: 12px;
+  padding-left: 10px;
+  padding-bottom: 7px;
+}
+.album-selections .active {
+  color: #FF8000;
+}

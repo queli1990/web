@@ -1,0 +1,116 @@
+.mixLists {
+  width: 1420px;
+  margin: 35px auto 0 auto;
+}
+.mixLists::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.mixtitle {
+  margin-bottom: 23px;
+}
+.mixLists h2 {
+  position: relative;
+  font-size: 24px;
+  color: #666666;
+  margin-left: 16px;
+}
+.mixLists h2::before {
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 24px;
+  background-color: #F07E14;
+  top: 5px;
+  position: absolute;
+  left: -16px;
+}
+.more-text {
+  position: relative;
+  font-size: 12px;
+  color: #969696;
+  display: inline-block;
+  margin-left: 35px;
+}
+.more-text:hover {
+  cursor: pointer;
+}
+.more-text::before {
+  position: absolute;
+  top: 3px;
+  left: -14px;
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  background: #C9C9C9;
+}
+.mixBox {
+  width: 100%;
+  height: 310px;
+}
+.mix-left {
+  font-size: 0;
+  float: left;
+  width: 460px;
+}
+.mix-right {
+  font-size: 0;
+  float: right;
+  width: 960px;
+}
+.mix-right figure {
+  position: relative;
+  width: 220px;
+  overflow: hidden;
+  display: inline-block;
+  margin-left: 20px;
+}
+.mix-left img {
+  width: 460px;
+  height: 310px;
+}
+.mix-right img {
+  width: 220px;
+  height: 124px;
+}
+.figure-name {
+  font-size: 16px;
+  color: #333333;
+  margin-top: 19px;
+  margin-bottom: 19px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  cursor:pointer;
+}
+.figure-mainname {
+  overflow: hidden;
+  font-size: 16px;
+  color: #333333;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+.figure-subname {
+  overflow: hidden;
+  font-size: 13px;
+  text-align: center;
+  color: rgb(111, 109, 109);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.mixvip {
+  position: absolute;
+  top: 0;
+  background: url('../../../../images/other-VIP.png');
+  width: 50px;
+  height: 50px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

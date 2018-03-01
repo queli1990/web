@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="en" style="font-size:0px"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>UUTV</title><link rel="stylesheet" media="screen and (min-width:480px)" href="./static/styles/index.css?ver=1.0.1"><link rel="stylesheet" media="screen and (min-width: 320px) and (max-width: 480px)" href="./static/styles/mobile.css"></head><body><div id="app"><!--header nav--><header><h1><a href="#"><img src="./static/images/logo.png" style="margin-top: 0.10rem;width: 1.75rem;height: 0.37rem"></a></h1><ul><li><a href="javascript:void(0)" class="nav_text" v-bind:class="{active1: ok}" @click="hitHome(0)" id="homeid">首页</a></li><li><a href="javascript:void(0)" class="nav_text" v-bind:class="{active1: detailVisble}" id="productid" @click="hitHome(1)">UUTV</a></li><li><a href="javascript:void(0)" target="_blank" class="nav_text" v-bind:class="{active1: aboutVisble}" @click="hitHome(2)">关于我们</a></li></ul><a href="javascript:void(0)" class="buy_btn" @click="showDialog(1)">立即购买</a></header><!--content--><div id="fullpage" class="fullpage-container"><a href="https://qr.alipay.com/bax09658vskcd83wvlt880cd"></a><first-page v-if="ok"></first-page><second-page v-if="detailVisble"></second-page><about-page v-if="aboutVisble"></about-page></div><!--buyDialog--><div v-if="buyDialog" style="position:absolute;top:0;left:0;bottom:0;right:0;background-color:rgba(58,60,60,.5); z-index: 11;overflow:scroll"><div class="buyContainer"><div class="dismiss-dia" @click="showDialog(1)">X</div><div class="m_dismissDia" @click="showDialog(1)"></div><h1 class="buyer-info">收货人信息</h1><div class="c-line"></div><form action="" style="font-size:16px"><p class="p-common"><i>*</i> 收货人姓名： <input type="text" class="input-common" id="uName" v-model="uName"></p><p class="p-common"><i>*</i> &nbsp;&nbsp;&nbsp;&nbsp;联系邮箱： <input type="text" id="uEmail" class="input-common" v-model="uEmail"></p><p class="p-common"><i>*</i> &nbsp;&nbsp;&nbsp;&nbsp;联系电话： <input type="text" id="uPhone" class="input-common" v-model="uPhone"></p><p class="p-common"><i>*</i> &nbsp;&nbsp;&nbsp;&nbsp;收货地址： <input type="text" id="uAddress" class="input-common" v-model="uAddress"></p><p class="p-common">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q&nbsp;Q： <input type="text" id="uqq" class="input-common" v-model="uqq"></p><p class="p-common">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;微信： <input type="text" id="uwechat" class="input-common" v-model="uwechat"></p></form><div class="pay-btn"><span class="ok-btn" @click="pay()">提交订单</span></div></div></div><!--payDialog--><div v-if="payDialog" style="position:fixed;top:0;left:0;bottom:0;right:0;background-color:rgba(58,60,60,.5); z-index: 11; overflow:scroll"><div class="buyContainer" style="padding-bottom:0.1rem"><div class="dismiss-dia" @click="showDialog(2)">X</div><div class="m_payBack" @click="showDialog(2)"></div><h1 class="pay-info">选择支付方式</h1><div class="orderSummary"><p class="totalPrice">应付金额：<i>$79</i></p><div class="orderNum"><h3>恭喜您，订单已经成功提交</h3><p>订单号：<label :for="orderNumber">{{orderNumber}}</label><span>&nbsp;|&nbsp;</span>请您在23小时59分钟内完成支付，以免预期订单被取消。</p></div></div><div class="grayline"></div><div class="payContainer"><div class="pay-tab"><button class="tablinks curr tab1" @click="doOrder(2)">微信支付</button> <button class="tablinks tab2" @click="doOrder(3)">支付宝支付</button> <button class="tablinks tab3" @click="doOrder(1)">paypal支付</button></div><div v-if="!isMobile"><div id="qrcode"></div></div></div><div class="pay_now" @click="mPay()">立即支付</div></div></div><!--successDialog--><div v-if="successDialog" style="position:fixed;top:0;left:0;bottom:0;right:0;background-color:rgba(58,60,60,.5); z-index: 11"><div class="buyContainer" style="width:5.24rem; left:6.66rem;padding-bottom:0.1rem"><div class="dismiss-dia" @click="showDialog(3)">X</div><div class="orderSummary" style="border:none; height:1.84rem; margin-top:0.48rem; line-height:0.48rem; text-align:center"><h2>恭喜您，订单已经成功支付</h2><p>您的订单已经成功支付，请牢记您的订单号：<label :for="orderNumber">{{orderNumber}}</label></p></div></div></div><!--side menu--><div class="side-menu"><div v-bind:class="[chatDialog ? 'side-menuWW-close' : 'side-menu_ww']" @click="chatDialog=!chatDialog"></div><div class="side-menu_ph"></div><div class="side-menu_wx"></div><div class="side-menu_mail"></div></div></div><div class="top" onclick="backTop()" id="top"></div><script></script><script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><!--<script src="http://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.8.1/jquery.fullPage.min.js"></script>--><script src="./static/js/jquery.qrcode.min.js"></script><script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script><script type="text/javascript" src="./static/js/md5.js"></script><script type="text/javascript" src="./static/js/tools.js"></script><script type="text/javascript" src="./static/plugins/layer/layer.js"></script><script>var interval;
+    var showPayBox;
+
+    Vue.component('first-page', {
+      template: '<div id="first">' +
+        '<div class="section0 section">' +
+        '<a href="http://47.93.83.7:8099/UUVideo.apk" class="d_link">立即下载APK</a></div>' +
+        '<div class="section1 section"></div>' +
+        '<div class="section2 section"></div>' +
+        '<div class="section3 section"></div>' +
+        '<div class="section section4"><common-footer></common-footer></div>' +
+        '</div>'
+    })
+    Vue.component('second-page', {
+      template: '<div id="second">' +
+        '<div class="section section-2-1"><div class="section2-buy" @click="showDialog(1)">立即购买</div></div>' +
+        '<div class="section section-2-2"></div>' +
+        '<div class="section section-2_vip"></div>' +
+        '<div class="section section-2-3"></div>' +
+        '<div class="section section-2-4"></div>' +
+        '<div class="section section-2-5"></div>' +
+        '<div class="section section-2-51"></div>' +
+        '<div class="section section-2-52"></div>' +
+        '<div class="section section-2-53"></div>' +
+        '<div class="section section-2-54"></div>' +
+        '<div class="section section-2-7"></div>' +
+        '<div class="section section-2-8"></div>' +
+        '<div class="section section-2-9"></div>' +
+        '<div class="section section-2-10"></div>' +
+        '<div class="section section-2-11"></div>' +
+        '<div class="section section-2-12"></div>' +
+        '<div class="section section2-13"><common-footer></common-footer></div>' +
+        '</div>',
+        methods: {
+        showDialog: function () {
+          this.$parent.showDialog(1)
+        },
+      }
+    })
+    Vue.component('about-page', {
+      template: '<div id="third">' +
+              '<div class="thirdImg"></div>' +
+              '<div class="about-container">'+
+              '<p style="margin-top:20px"><i style="color:#FF7F00;">世纪优优（天津）文化传播股份有限公司</i>（以下简称“世纪优优”）创办于2012年，是全球领先的数字娱乐视频供应商，是中国地区最早开发海外业务、也是目前中国地区最大的海外全媒体发行运营商。</p>' +
+              '<p>&nbsp;&nbsp;&nbsp;&nbsp;2016年7月，世纪优优成功挂牌全国中小企业股份转让系统（简称“新三板”），股票名称：世纪优优；股票代码：837666，被业内称之为“中国海外全媒体发行第一股”，同年获得天津市滨海新区“企业新三板挂牌专向扶持股”，同年获得天津市滨海新区“企业新三板挂牌专向扶持。</p>' +
+              '<p>&nbsp;&nbsp;&nbsp;&nbsp;世纪优优是“国家高新技术企业”和“天津市高新技术企业”“天津市科技型中小企业”，在第十二届中国（深圳）国际文化产业博览交易会上，世纪优优获得“2015文化产业创新创业优秀企业”荣誉称号；在第11届亚洲品牌盛典上，世纪优优获得“2016京津冀协同发展贡献品牌”奖和“亚洲名优品牌奖”；在2016年新三板创新峰会上获得“2016新三板杰出人物”和“2016新三板优秀创新企业”称号。</p>' +
+              '<p>世纪优优成立五年以来，以华语视频内容（影视、综艺、网大、网剧、动漫等）为依托，逐步形成了视频出海、游戏出海、网络文学出海等三大文化出海业务体系，并兼顾“版权保护”的全媒体数字娱乐生态运营体系</p>' +
+              '<p>在海外新媒体发行运营方面，世纪优优正打造一个覆盖PC端、移动端、电视端的海外新媒体发行渠道，合作伙伴遍及全球，包括YouTube、Dailymotion、Viki、Amazon、iTunes、hulu、Netflix、ROKU等30多家公司。公司自主研发的“海外新媒体发行运营平台”，覆盖90%以上海外新媒体渠道，辐射200多个国家近20亿海外观众。其独家拥有的电视剧、电影、动漫、综艺节目的海外版权内容超过10万小时，包括热播电视剧《择天记》、《继承人》、《黎明决战》、《那片星空那片海》、《遇见爱情的利先生》、《嘿，孩子》、《如果蜗牛有爱情》、《胭脂》、《麻雀》、《小别离》、《旋风少女2》、《仙剑云之凡》、《柠檬初上》、《青丘狐传说》、《女医明妃传》、《寂寞空庭春欲晚》、《美丽的秘密》、《琅琊榜》、《伪装者》、《大好时光》、《神犬小七》等等。2014年起世纪优优成为YouTube在中国地区最大的内容合作运营商。</p>' +
+              '<p style="margin-top:20px"><i style="color:#FF7F00;">在海外传统电视媒体发行方面</i>，世纪优优的发行范围覆盖东南亚、日韩、北美、欧洲、非洲等地区。其国内热播电视剧《小别离》、《如果蜗牛有爱情》、《遇见爱情的利先生》、《嘿，孩子》、《海上牧云记》、《半妖倾城》等在海外电视台发行非常成功。在OTT盒子产品方面，世纪优优自主研发了OTT开放平台，以华语数字视频内容为核心，以互联网、移动互联网技术为基础，覆盖PC端、移动端、电视端，以及具有自主知识产权的硬件产品优优盒子（UUBOX）等。</p>' + 
+              '<p style="margin-top:20px"><i style="color:#FF7F00;">在版权保护方面</i>，世纪优优是国内版权保护行业标准的制定者和引领者，2015、2016两年为近150亿票房的电影项目保驾护航，包括《爱乐之城》、《长城》、《罗曼蒂克消亡史》、《我不是潘金莲》、《大话西游3》、《盗墓笔记》、《惊天魔盗团2》、《近在咫尺的爱恋》、《魔兽》、《愤怒的小鸟》、《老炮儿》、《007：幽灵党》、《解救吾先生》、《碟中谍5：神秘国度》、《模仿游戏》 等提供版权保护，保护效果、市场占有率、客户满意度稳居行业前列。</p>' +  
+              '<p style="margin-top:20px"><i style="color:#FF7F00;">在游戏出海方面</i>，世纪优优收购国内著名资深游戏研发团队，积极布局海外发行策略。与APP Store、Google play、kakao、line等应用平台建立深入合作，结合世纪优优海外YouTube、Amazon、Facebook、Instagram、mobvista等渠道营运平台，重点以亚洲地区开始入手，深耕全球目标市场，逐步打造全球一体化的游戏出海发行平台。</p>' + 
+              '<p>目前，世纪优优自主运营的四款游戏产品已成功覆盖全球多个地区，其中《勇者大作战》深耕韩国地区，《黑点争霸》在东南亚地区获得游戏最佳创意大奖，《机甲三国志》在港澳台地区表现不俗，《海岛争霸》也成功进入欧美市场。</p>' + 
+              '<p style="margin-top:20px"><i style="color:#FF7F00;">在网络文学出海方面</i>，世纪优优旗下Orientalwuxia平台，是最大的中文小说出海网站，面向全球的网络文学迷，现有中译英的网络文学200多部，章节超过30000章，触达30亿人群。覆盖武侠、玄幻、游戏、灵异、科幻等海外小说迷非常喜欢的东方文学题材。其中，面向日韩、东南亚以及欧美等地读者，涉及十余种语言文字，包括：英语、泰语、韩语、日语、越南语、俄语等多种语种阅读服务，并提供跨平台互联网服务。随着华语文化的全球传播大潮到来，外界普遍认为，海外市场规模将远超1000亿。世纪优优将以“中国文化走出去”、”一带一路“建设为契机，以传播中国文化为己任，更好的为中国影视、游戏、网络文学等行业服务，为中国文化走出国门助力。</p>' + 
+              '<div class="aboutQr"> <span></span><span></span> </div>' +
+              '</div>' +
+        '</div>'
+    })
+    Vue.component('common-footer', {
+      template: '<footer class="f-bottom"><div class="mui-global-fragment-load"><a href="javascript:void(0)" class="service-hot-line">服务热线 400-996-3068（7*24小时）</a><a href="javascript:void(0)" class="genuine-guarantee">正品保证</a><a href="javascript:void(0)" class="free-delivery">全场包邮</a></div><div class="f-sub-bottom"><a href="javascript:void(0)" class="wechat-publicNo"></a>' +
+        '<p style="padding-top: 0.15rem;">联系我们: 北京市朝阳区广渠路18号院市东国际中心A座10层1005-1010室(010-87776488 / 87776499) <span></span></p>' +
+        '<p>Copyright &copy; 2002-2017 www.100uu.com.cn All Rights Revered版权所有 世纪优优 (天津) 文化传播股份有限公司 </p>' +
+        '</div></footer>',
+        methods: {
+          showChatWindow: function () {
+            window.open("https://webatm.alibaba.com/start_web_atm.htm?enemberId=8pctgRBMALMVWhv6t7TzWbywG210ItZB6wdkfYSa%2Bs4%3D&pid=&eid=&from=1&refer=https%3A%2F%2F100uu.onesite.alibaba.com%2F&pageid=7c41b07e0be2d59f5934e72a15c76a6fda69e1fdc4","_blank","height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no")
+          },
+        }
+    })
+    new Vue({
+      el: '#app',
+      data: {
+        isMobile: false,
+        ok: true,
+        detailVisble: false,
+        buyDialog: false,
+        payDialog: false,
+        successDialog: false,
+        chatDialog: false,
+        aboutVisble: false,
+        uName: '',
+        uqq: '',
+        uwechat: '',
+        uAddress: '',
+        uEmail: '',
+        uPhone: '',
+        orderNumber: '',
+        payway: 3,
+        payUrl: '',
+        paypalUrl: '',
+        wechatUrl: '',
+        alipayUrl: '',
+        ip:'',
+        source: '100uu.tv',
+        checkoutUrl: 'http://api.100uu.tv/app/order/doCheakOut.do',
+        switchPayUrl: 'http://api.100uu.tv/app/order/doOrderPay.do',
+        orderUrl: 'http://api.100uu.tv/app/order/doQueryBoxOrder.do',
+        countUrl: 'http://api.100uu.tv/app/order/doSourceStatistics.do'
+      },
+      methods: {
+        showChatWindow: function () {
+          window.open("https://webatm.alibaba.com/start_web_atm.htm?enemberId=8pctgRBMALMVWhv6t7TzWbywG210ItZB6wdkfYSa%2Bs4%3D&pid=&eid=&from=1&refer=https%3A%2F%2F100uu.onesite.alibaba.com%2F&pageid=7c41b07e0be2d59f5934e72a15c76a6fda69e1fdc4","_blank","height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no")
+        },
+        showDialog: function (step) {
+          if (step == 1) {
+            console.log("test")
+            this.uName = ""
+            this.uEmail = ""
+            this.uPhone = ""
+            this.uAddress = ""
+            this.uqq = ""
+            this.uwechat = ""
+            this.buyDialog = !this.buyDialog
+          } else if (step == 2) {
+            this.payDialog = !this.payDialog
+          } else if (step == 3) {
+            this.successDialog = !this.successDialog
+            window.clearInterval(interval);
+          }
+        },
+        doOrder: function (val) {
+          var isToPay = false
+          //1 paypal 2 wechat 3 zhifubao
+          if (val == 1) {
+            $(".pay-tab").find("button").eq(2).addClass("curr");
+            $(".pay-tab").find("button").eq(0).removeClass("curr")
+            $(".pay-tab").find("button").eq(1).removeClass("curr")
+            $("#qrcode").html('').addClass("paypal").removeClass("alipay").removeClass("wechat");
+            if (this.paypalUrl != "") {
+              $("#qrcode").append('<a target="_blank" href="' + this.paypalUrl +
+                '" class="paypal-btn">使用贝宝支付</a>')
+            } else {
+              isToPay = true
+            }
+          } else if (val == 2) {
+            $(".pay-tab").find("button").eq(0).addClass("curr");
+            $(".pay-tab").find("button").eq(1).removeClass("curr")
+            $(".pay-tab").find("button").eq(2).removeClass("curr")
+            $("#qrcode").html('').addClass("wechat").removeClass("alipay").removeClass("paypal");
+            if (this.wechatUrl != "") {
+              $('#qrcode').qrcode({
+                width: 160,
+                height: 160,
+                text: this.wechatUrl
+              })
+            } else {
+              isToPay = true
+            }
+          } else if (val == 3) {
+            $(".pay-tab").find("button").eq(1).addClass("curr");
+            $(".pay-tab").find("button").eq(0).removeClass("curr")
+            $(".pay-tab").find("button").eq(2).removeClass("curr")
+            $("#qrcode").html('').addClass("alipay").removeClass("wechat").removeClass("paypal");
+            if (this.alipayUrl != "") {
+              $('#qrcode').qrcode({
+                width: 160,
+                height: 160,
+                text: this.alipayUrl
+              })
+            } else {
+              isToPay = true
+            }
+          }
+          if (isToPay) {
+            this.changePayWay(val)
+          }
+        },
+        mPay: function() {
+          alert(this.payUrl)
+          window.open(this.payUrl)
+        },
+        pay: function () {
+          if (this.uName == "") {
+            layer.tips('收货人姓名不能为空', '#uName', {tips: 3});
+            return false;
+          }
+
+          if (this.uEmail == "") {
+            layer.tips('联系邮箱不能为空', '#uEmail', {tips: 3});
+            return false;
+          }
+          if (!/^([a-zA-Z0-9_\.\-])+\@([a-zA-Z0-9\-])+\.+([a-zA-Z0-9\.]{2,})+$/.test(this.uEmail)) {
+            layer.tips('请输入一个有效的联系邮箱', "#uEmail");
+            return false;
+          }
+
+          if (this.uPhone == "") {
+            layer.tips('联系电话不能为空', '#uPhone', {tips: 3});
+            return false;
+          }
+
+          if (this.uAddress == "") {
+            layer.tips('收货地址不能为空', '#uAddress', {tips: 3});
+            return false;
+          }
+          var platform = this.isMobile ? "mweb" : "web"
+          var params = "?contacts=" + this.uName + "&phone=" + this.uPhone + "&email=" + this.uEmail + "&address=" + this.uAddress + "&source=" + this.source + "&wechat=" + this.uwechat + "&qq="+ this.uqq +"&ip="+this.ip +"&platform="+platform+"&sign=" + md5(this.uName + this.uPhone + this.uEmail + this.uwechat + this.uqq +
+              this.uAddress + this.source + platform);
+          var _this = this;
+          $.getJSON(this.checkoutUrl + params, function(data){
+            _this.payUrl = data.url
+            if (data.status == "3") {
+              _this.orderNumber = data.orderNo
+              _this.alipayUrl = data.url
+              _this.buyDialog = false;
+              _this.payDialog = true;
+              var t1 = window.setTimeout(function () {
+                $("#qrcode").html('').addClass("alipay");
+                $('#qrcode').qrcode({
+                  width: 160,
+                  height: 160,
+                  text: data.url
+                });
+                window.clearTimeout(t1); //去掉定时器
+              }, 500); //使用字符串执行方法
+              window.clearInterval(interval);
+              _this.queryBoxOrder();
+            }
+          })
+        },
+        queryBoxOrder: function () {
+          var orderNo = this.orderNumber
+          var queryUrl = this.orderUrl
+          if (orderNo != undefined && orderNo != "" && queryUrl != undefined && queryUrl != "") {
+            var url = queryUrl + "?orderNo=" + orderNo
+            var _this = this
+            interval = window.setInterval(function () {
+              $.getJSON(url, function(data){
+                if (data.status == "2") {
+                  window.clearInterval(interval);
+                  _this.buyDialog = false
+                  _this.payDialog = false
+                  _this.successDialog = true
+                }
+              })
+            }, 2000);
+          }
+        },
+        changePayWay: function (id) {
+          this.payway = parseInt(id)
+          var platform = this.isMobile ? "mweb" : "web"
+          var sign = md5(this.orderNumber + id + platform)
+          var params = "?orderNo=" + this.orderNumber + "&paywayId=" + id + "&platform=" +platform+ "&sign=" + sign;
+          var _this = this;
+          $.getJSON(this.switchPayUrl + params, function(data){
+            debugger
+             _this.payUrl = data.url
+             if (data.status == "3") {
+              _this.buyDialog = false;
+              _this.payDialog = false;
+              _this.successDialog = true;
+            } else if (data.status == "4") {
+              if (_this.payway == 1) {
+                _this.paypalUrl = data.url
+                $("#qrcode").append('<a target="_blank" href="' + data.url +
+                  '" class="paypal-btn">使用贝宝支付</a>')
+              } else if (_this.payway == 2) {
+                $('#qrcode').qrcode({
+                  width: 160,
+                  height: 160,
+                  text: data.url
+                })
+                _this.wechatUrl = data.url
+              } else if (_this.payway == 3) {
+                _this.alipayUrl = data.url
+                $('#qrcode').qrcode({
+                  width: 160,
+                  height: 160,
+                  text: data.url
+                })
+              }
+            }
+          })
+          window.clearInterval(interval);
+          _this.queryBoxOrder();
+        },
+        interviewCount: function () {
+          var _this = this;
+          var url = 'http://chaxun.1616.net/s.php?type=ip&output=json&callback=?&_=' + Math.random();
+          $.getJSON(url, function(data) {
+            _this.ip = data.Ip;
+            var d = new Date();
+            var ts = d.getTime() - d.getTimezoneOffset()*60*1000;
+            var s = new Date(ts).toISOString()
+            var vt = s.replace(/T/g,' ').replace(/\.\d+Z$/,'')
+            var sign = md5(_this.source+data.IP+'web'+location.url+vt);
+            var countParams = "?source=" + _this.source + "&ip=" + data.Ip + "&platform=web" + "&url=" + location.href +"&visitTime="+ vt + "&sign=" + sign
+            $.getJSON(_this.countUrl + countParams, function(data){
+              if (data.status === "2") {
+                console.log('统计成功')
+              } else {
+                console.log('统计失败')
+              }
+            })
+          });
+        },
+        hitHome: function (key) {
+          debugger
+          switch (key) {
+            case 0:
+              this.ok = true
+              this.detailVisble = false
+              this.aboutVisble = false
+              break;
+            case 1:
+              this.ok = false
+              this.detailVisble = true
+              this.aboutVisble = false
+              break;
+            case 2:
+              if (!this.isMobile) {
+                return window.open("http://www.100uu.com.cn")
+              }
+              this.ok = false
+              this.detailVisble = false
+              this.aboutVisble = true
+              break;
+            default:
+              break;
+          }
+        },
+        move: function(event) {
+          if (this.buyDialog) {
+            // if (event.cancelable) {
+            //     // 判断默认行为是否已经被禁用mac
+            //     if (!event.defaultPrevented) {
+            //         event.preventDefault();
+            //     }
+            // }
+            // event.stopPropagation();
+          }
+        },
+      },
+      watch: {
+        buyDialog:function(val, oldVal) {
+          if(val) {
+            $("#fullpage").hide()
+          } else {
+            $("#fullpage").show()
+
+          }
+        },
+        payDialog:function(val, oldVal) {
+          if (val === false) interval && window.clearInterval(interval)
+        },
+        ok: function (val, oldVal) {
+          document.body.scrollTop = 0
+        },
+        chatDialog: function (val, oldVal) {
+          if (val == true) {PP.show()} else {PP.hide()}
+        }
+      },
+      beforeCreate: function () {
+        if(location.href.indexOf("file") > -1) return
+        (function (i, s, o, g, r, a, m) {
+          i['GoogleAnalyticsObject'] = r;
+          i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+          }, i[r].l = 1 * new Date();
+          a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+          a.async = 1;
+          a.src = g;
+          m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-100442951-1', 'auto');
+        ga('send', 'pageview');
+      },
+      created: function () {
+        // resize dom
+        var docEl = document.documentElement
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+        var recalc = function () {
+          docEl.style.fontSize = 100 * (docEl.clientWidth / 1920) + 'px'
+        }
+        window.addEventListener(resizeEvt, recalc, false)
+        recalc()
+        //判断是否为移动端
+        this.isMobile = isMobile()
+        //触摸监听
+        window.addEventListener('touchmove', this.move, false)
+        //statistics
+        if(location.href.indexOf("file") > -1) return
+        this.source = location.search === "" ? "100uu.tv" : location.search.replace("?from=", '');
+        this.interviewCount()
+      },
+      mounted: function () {
+        //推广链接过来，模拟点击详情页面document.referrer//border-width: 0;
+        if (this.source != "100uu.tv") {
+          document.getElementById("productid").click()
+        }
+        window.ppSettings = {app_uuid:'231544a6-4a95-11e7-b287-00163e00061e',view:{launcher_is_show:false,launch_style:{mode: 'custom',position:'left'}}};(function(){var w=window,d=document;function l(){var a=d.createElement('script');a.type='text/javascript';a.async=!0;a.charset='utf-8';a.src='https://ppmessage.cn/ppcom/assets/pp-library.min.js';var b=d.getElementsByTagName('script')[0];b.parentNode.insertBefore(a,b)}l();})();
+      }
+    });</script></body></html>

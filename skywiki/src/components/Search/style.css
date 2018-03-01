@@ -1,0 +1,123 @@
+.Search {
+  margin: 0 auto;
+}
+.cellContent {
+  position: relative;
+  display: inline-block;
+  margin-left: 250px;
+  width: 1420px;
+}
+.poster {
+  margin: 24px 40px 26px 0px;
+  width: 180px;
+  height: 256px;
+  float: left;
+}
+.rightContent {
+  position: relative;
+  float: right;
+  margin-top: 24px;
+  display: inline-block;
+  width: 1191px;
+  height: 256px;
+}
+.span_videoName {
+  display: block;
+  height: 24px;
+  font-size: 18px;
+}
+.span_director {
+  font-size: 12px;
+  color: #525252;
+  height: 16px;
+}
+.span_actor {
+  margin-left: 174px;
+  font-size: 12px;
+  color: #525252;
+  height: 16px;
+}
+.lineTwo {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.lineThree {
+  width: 900px;
+}
+.span_description_left {
+  position: absolute;
+  float: left;
+  display: inline-block;
+}
+.span_description {
+  font-size: 12px;
+  color: #525252;
+  display: inline-block;
+  position: absolute;
+  float: right;
+  margin-left: 80px;
+  width: 900px;
+}
+.line {
+  background-color: #D8D8D8;
+  width: 1420px;
+  height: 1px;
+}
+.playBtn {
+  position: absolute;
+  bottom: 0;
+  width: 150px;
+  height: 45px;
+  background-color: #F07E14;
+  border-radius: 2px;
+}
+.playBtn img {
+  width: 21px;
+  height: 21px;
+  margin-left: 27px;
+  margin-top: 12px;
+  margin-right: 12px;
+}
+.playBtn span {
+  color: #FFFFFF;
+  font-size: 16px;
+  margin-top: 12px;
+  display: inline-block;
+}
+.content {
+  position: absolute;
+  left: 50%;
+}
+.pagination {
+  text-align: center;
+}
+.pagination li {
+  margin-left: 5px;
+  float: left;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #D9D9D9;
+  list-style:none; /* 将默认的列表符号去掉 */
+  padding:0; /* 将默认的内边距去掉 */
+  /*margin:0; /* 将默认的外边距去掉 */
+  line-height: 40px;
+}
+.activepage {
+  background-color: #F07E14;
+}
+.activepage a{
+  color: white;
+}
+.aInPage {
+  text-decoration: none;
+  color:#777777;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+.vipImg {
+  position: absolute;
+  left: 0;
+  top: 24px;
+}
